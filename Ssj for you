@@ -1,0 +1,115 @@
+index.html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galaxy of Love</title>
+
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    background: black;
+    overflow: hidden;
+    height: 100%;
+    font-family: 'Georgia', serif;
+}
+
+.space {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: black;
+}
+
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    opacity: 0.8;
+}
+
+.galaxy {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 400px;
+    transform-style: preserve-3d;
+    animation: rotateGalaxy 30s linear infinite;
+}
+
+@keyframes rotateGalaxy {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.heart {
+    position: absolute;
+    color: hotpink;
+    font-size: 28px;
+}
+
+.center-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 22px;
+    text-align: center;
+    pointer-events: none;
+}
+</style>
+</head>
+
+<body>
+<div class="space" id="space"></div>
+
+<div class="galaxy" id="galaxy"></div>
+
+<div class="center-text">
+    Te Amo Muchote 💖
+</div>
+
+<script>
+const space = document.getElementById("space");
+const galaxy = document.getElementById("galaxy");
+
+// estrellas
+for (let i = 0; i < 250; i++) {
+    const star = document.createElement("div");
+    star.className = "star";
+    star.style.left = Math.random() * 100 + "vw";
+    star.style.top = Math.random() * 100 + "vh";
+    star.style.opacity = Math.random();
+    space.appendChild(star);
+}
+
+// corazones en círculo (galaxia)
+const totalHearts = 24;
+const radius = 170;
+
+for (let i = 0; i < totalHearts; i++) {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💖";
+
+    const angle = (i / totalHearts) * Math.PI * 2;
+    const x = Math.cos(angle) * radius + 200;
+    const y = Math.sin(angle) * radius + 200;
+
+    heart.style.left = x + "px";
+    heart.style.top = y + "px";
+
+    galaxy.appendChild(heart);
+}
+</script>
+</body>
+</html>
